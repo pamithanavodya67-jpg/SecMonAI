@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecMon AI | Intelligent Cyber Security Platform</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:#050816;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    a{
+      text-decoration:none;
+      color:white;
+    }
+
+    .container{
+      width:90%;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      position:fixed;
+      width:100%;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(12px);
+      background:rgba(5,8,22,0.75);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-content{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 0;
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:800;
+      color:#7c5cff;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+    }
+
+    .nav-links a{
+      color:#b7bfd8;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:white;
+    }
+
+    .nav-btn{
+      background:#7c5cff;
+      padding:12px 22px;
+      border-radius:14px;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .nav-btn:hover{
+      background:#6244ff;
+      transform:translateY(-2px);
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      padding-top:100px;
+    }
+
+    .hero::before{
+      content:'';
+      position:absolute;
+      width:800px;
+      height:800px;
+      background:radial-gradient(circle,#7c5cff25 0%,transparent 70%);
+      top:-300px;
+      left:-250px;
+    }
+
+    .hero::after{
+      content:'';
+      position:absolute;
+      width:700px;
+      height:700px;
+      background:radial-gradient(circle,#00d4ff15 0%,transparent 70%);
+      bottom:-300px;
+      right:-250px;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .hero-text h1{
+      font-size:70px;
+      line-height:1.05;
+      margin-bottom:25px;
+      font-weight:800;
+    }
+
+    .gradient{
+      background:linear-gradient(90deg,#7c5cff,#00d4ff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero-text p{
+      color:#aeb5ca;
+      font-size:18px;
+      line-height:1.8;
+      margin-bottom:35px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:18px;
+      margin-bottom:35px;
+    }
+
+    .primary-btn{
+      background:#7c5cff;
+      padding:16px 28px;
+      border-radius:14px;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .primary-btn:hover{
+      background:#6244ff;
+      transform:translateY(-3px);
+    }
+
+    .secondary-btn{
+      border:1px solid rgba(255,255,255,0.12);
+      padding:16px 28px;
+      border-radius:14px;
+      color:#d5d9e7;
+      transition:0.3s;
+    }
+
+    .secondary-btn:hover{
+      background:rgba(255,255,255,0.05);
+    }
+
+    .stats{
+      display:flex;
+      gap:35px;
+      margin-top:25px;
+    }
+
+    .stat h2{
+      color:#00d4ff;
+      margin-bottom:5px;
+    }
+
+    .stat p{
+      font-size:14px;
+      color:#aeb5ca;
+    }
+
+    /* DASHBOARD */
+
+    .dashboard{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:28px;
+      padding:30px;
+      backdrop-filter:blur(15px);
+      box-shadow:0 0 60px rgba(124,92,255,0.15);
+    }
+
+    .dashboard-top{
+      display:flex;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+    }
+
+    .red{background:#ff5f57;}
+    .yellow{background:#febc2e;}
+    .green{background:#28c840;}
+
+    .dashboard-card{
+      background:#0f1428;
+      border:1px solid rgba(255,255,255,0.05);
+      padding:22px;
+      border-radius:18px;
+      margin-bottom:18px;
+    }
+
+    .dashboard-card h3{
+      margin-bottom:12px;
+      font-size:20px;
+    }
+
+    .dashboard-card p{
+      color:#b6bdd0;
+    }
+
+    .progress{
+      width:100%;
+      height:12px;
+      background:#1e2540;
+      border-radius:20px;
+      overflow:hidden;
+      margin-top:14px;
+    }
+
+    .progress-bar{
+      width:94%;
+      height:100%;
+      background:linear-gradient(90deg,#7c5cff,#00d4ff);
+    }
+
+    /* FEATURES */
+
+    .features{
+      padding:120px 0;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:70px;
+    }
+
+    .section-title h2{
+      font-size:48px;
+      margin-bottom:18px;
+    }
+
+    .section-title p{
+      color:#9fa6bc;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+    }
+
+    .feature-card{
+      background:#0d1225;
+      border:1px solid rgba(255,255,255,0.05);
+      padding:35px;
+      border-radius:24px;
+      transition:0.3s;
+    }
+
+    .feature-card:hover{
+      transform:translateY(-8px);
+      border-color:#7c5cff;
+    }
+
+    .icon{
+      width:60px;
+      height:60px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#7c5cff,#00d4ff);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:28px;
+      margin-bottom:20px;
+    }
+
+    .feature-card h3{
+      margin-bottom:15px;
+      font-size:22px;
+    }
+
+    .feature-card p{
+      color:#aeb5ca;
+      line-height:1.7;
+    }
+
+    /* SECURITY SECTION */
+
+    .security{
+      padding:120px 0;
+    }
+
+    .security-wrapper{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .security-box{
+      background:#0d1225;
+      padding:35px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+
+    .security-box h3{
+      margin-bottom:20px;
+      font-size:26px;
+    }
+
+    .security-box ul{
+      list-style:none;
+    }
+
+    .security-box li{
+      margin-bottom:18px;
+      color:#bcc3d8;
+    }
+
+    /* PRICING */
+
+    .pricing{
+      padding:120px 0;
+    }
+
+    .pricing-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:25px;
+    }
+
+    .price-card{
+      background:#0d1225;
+      padding:40px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,0.06);
+      transition:0.3s;
+    }
+
+    .price-card:hover{
+      transform:translateY(-8px);
+      border-color:#7c5cff;
+    }
+
+    .price-card h3{
+      margin-bottom:15px;
+      font-size:28px;
+    }
+
+    .price{
+      font-size:48px;
+      font-weight:800;
+      margin-bottom:20px;
+      color:#00d4ff;
+    }
+
+    .price-card ul{
+      list-style:none;
+      margin-bottom:30px;
+    }
+
+    .price-card li{
+      margin-bottom:14px;
+      color:#b8c0d7;
+    }
+
+    .price-btn{
+      display:block;
+      text-align:center;
+      background:#7c5cff;
+      padding:15px;
+      border-radius:14px;
+      font-weight:600;
+    }
+
+    /* TESTIMONIALS */
+
+    .testimonials{
+      padding:120px 0;
+    }
+
+    .testimonial-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:25px;
+    }
+
+    .testimonial{
+      background:#0d1225;
+      padding:35px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .testimonial p{
+      color:#b9c1d8;
+      line-height:1.8;
+      margin-bottom:20px;
+    }
+
+    .testimonial h4{
+      color:#00d4ff;
+    }
+
+    /* CTA */
+
+    .cta{
+      padding:100px 0;
+    }
+
+    .cta-box{
+      background:linear-gradient(135deg,#7c5cff,#00d4ff);
+      padding:80px;
+      border-radius:32px;
+      text-align:center;
+    }
+
+    .cta-box h2{
+      font-size:48px;
+      margin-bottom:20px;
+    }
+
+    .cta-box p{
+      font-size:18px;
+      margin-bottom:35px;
+    }
+
+    .cta-box a{
+      background:white;
+      color:#111;
+      padding:16px 30px;
+      border-radius:14px;
+      display:inline-block;
+      font-weight:700;
+    }
+
+    /* FOOTER */
+
+    footer{
+      border-top:1px solid rgba(255,255,255,0.08);
+      padding:50px 0;
+      text-align:center;
+      color:#9aa3bc;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:900px){
+
+      .hero-content,
+      .security-wrapper{
+        grid-template-columns:1fr;
+      }
+
+      .hero-text h1{
+        font-size:48px;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .stats{
+        flex-direction:column;
+        gap:15px;
+      }
+
+      .cta-box{
+        padding:50px 30px;
+      }
+
+      .cta-box h2{
+        font-size:34px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+    <div class="container nav-content">
+
+      <div class="logo">SecMon AI</div>
+
+      <div class="nav-links">
+        <a href="#">Platform</a>
+        <a href="#">Threat Intel</a>
+        <a href="#">AI Engine</a>
+        <a href="#">Pricing</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <a href="#" class="nav-btn">Start Free</a>
+
+    </div>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="container hero-content">
+
+      <div class="hero-text">
+
+        <h1>
+          Intelligent
+          <span class="gradient">AI Security</span>
+          Monitoring
+        </h1>
+
+        <p>
+          SecMon AI protects your applications, APIs,
+          cloud infrastructure, and enterprise systems
+          using advanced machine learning threat detection
+          and real-time cyber intelligence.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#" class="primary-btn">Get Started</a>
+          <a href="#" class="secondary-btn">Live Demo</a>
+        </div>
+
+        <div class="stats">
+
+          <div class="stat">
+            <h2>99.9%</h2>
+            <p>Threat Detection Accuracy</p>
+          </div>
+
+          <div class="stat">
+            <h2>24/7</h2>
+            <p>Real-Time Monitoring</p>
+          </div>
+
+          <div class="stat">
+            <h2>5K+</h2>
+            <p>Protected Servers</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- DASHBOARD -->
+
+      <div class="dashboard">
+
+        <div class="dashboard-top">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
+        </div>
+
+        <div class="dashboard-card">
+          <h3>Threat Detection Score</h3>
+          <p>94% systems secured successfully</p>
+
+          <div class="progress">
+            <div class="progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <h3>Live AI Monitoring</h3>
+          <p>42 active infrastructure scans running</p>
+        </div>
+
+        <div class="dashboard-card">
+          <h3>Automatic Risk Response</h3>
+          <p>12 vulnerabilities isolated in the last 24 hours</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section class="features">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Advanced Security Features</h2>
+        <p>
+          Enterprise-grade AI tools for modern cybersecurity teams.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <div class="icon">🛡️</div>
+          <h3>Threat Prevention</h3>
+          <p>
+            AI-driven vulnerability scanning and attack prevention systems.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon">⚡</div>
+          <h3>Instant Alerts</h3>
+          <p>
+            Receive real-time alerts for suspicious activities and intrusions.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon">☁️</div>
+          <h3>Cloud Protection</h3>
+          <p>
+            Secure cloud workloads, Kubernetes clusters, and containers.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon">📊</div>
+          <h3>AI Analytics</h3>
+          <p>
+            Smart dashboards with predictive cyber threat intelligence.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SECURITY SECTION -->
+
+  <section class="security">
+
+    <div class="container security-wrapper">
+
+      <div>
+
+        <div class="section-title" style="text-align:left;">
+          <h2>Built for Enterprise Security</h2>
+
+          <p>
+            SecMon AI combines machine learning,
+            behavioral analysis, and real-time monitoring
+            to secure your infrastructure.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="security-box">
+
+        <h3>Platform Capabilities</h3>
+
+        <ul>
+          <li>✔ AI-Powered Threat Detection</li>
+          <li>✔ Real-Time Log Monitoring</li>
+          <li>✔ API & Cloud Security Protection</li>
+          <li>✔ Security Automation Workflows</li>
+          <li>✔ Vulnerability Intelligence Engine</li>
+          <li>✔ SOC Team Dashboard</li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PRICING -->
+
+  <section class="pricing">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Simple Pricing</h2>
+        <p>
+          Flexible plans for startups, teams, and enterprises.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="price-card">
+
+          <h3>Starter</h3>
+
+          <div class="price">$19</div>
+
+          <ul>
+            <li>✔ Basic Threat Monitoring</li>
+            <li>✔ 3 Projects</li>
+            <li>✔ Email Alerts</li>
+            <li>✔ API Access</li>
+          </ul>
+
+          <a href="#" class="price-btn">Choose Plan</a>
+
+        </div>
+
+        <div class="price-card">
+
+          <h3>Professional</h3>
+
+          <div class="price">$79</div>
+
+          <ul>
+            <li>✔ Advanced AI Security</li>
+            <li>✔ Unlimited Projects</li>
+            <li>✔ Real-Time Monitoring</li>
+            <li>✔ Team Collaboration</li>
+          </ul>
+
+          <a href="#" class="price-btn">Choose Plan</a>
+
+        </div>
+
+        <div class="price-card">
+
+          <h3>Enterprise</h3>
+
+          <div class="price">$199</div>
+
+          <ul>
+            <li>✔ Enterprise Infrastructure Security</li>
+            <li>✔ Dedicated AI Engine</li>
+            <li>✔ SOC Dashboard</li>
+            <li>✔ 24/7 Premium Support</li>
+          </ul>
+
+          <a href="#" class="price-btn">Choose Plan</a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- TESTIMONIALS -->
+
+  <section class="testimonials">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Trusted by Security Teams</h2>
+        <p>
+          Companies worldwide rely on SecMon AI.
+        </p>
+      </div>
+
+      <div class="testimonial-grid">
+
+        <div class="testimonial">
+          <p>
+            “SecMon AI dramatically improved our threat response time
+            and reduced infrastructure vulnerabilities.”
+          </p>
+
+          <h4>— Daniel Carter, Security Engineer</h4>
+        </div>
+
+        <div class="testimonial">
+          <p>
+            “The AI monitoring system instantly detected unusual
+            traffic behavior before it became a serious issue.”
+          </p>
+
+          <h4>— Sarah Kim, DevOps Lead</h4>
+        </div>
+
+        <div class="testimonial">
+          <p>
+            “One of the best cloud security platforms we’ve used.
+            Fast, scalable, and very developer-friendly.”
+          </p>
+
+          <h4>— Michael Reyes, CTO</h4>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+
+  <section class="cta">
+
+    <div class="container">
+
+      <div class="cta-box">
+
+        <h2>Start Securing Your Infrastructure Today</h2>
+
+        <p>
+          AI-powered monitoring and enterprise-grade cybersecurity protection.
+        </p>
+
+        <a href="#">Start Free Trial</a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="container">
+      © 2026 SecMon AI — Intelligent Security Monitoring Platform
+    </div>
+  </footer>
+
+</body>
+</html>
